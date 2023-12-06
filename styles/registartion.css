@@ -63,7 +63,7 @@ input{
     color: #fff;
 }
 
-.login{
+#login{
     padding: 10px 25px;
     border-radius: 50px;
     border: none;
@@ -72,7 +72,7 @@ input{
     transition: 0.5s;
 }
 
-.login:hover{
+#login:hover{
     background-color: rgb(209, 101, 0);
     cursor: pointer;
     transform: scale(1.1,1.1);

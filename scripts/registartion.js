@@ -5,6 +5,7 @@ let usersFromLocalStorage = JSON.parse(localStorage.getItem("userData"));
 console.log(usersFromLocalStorage);
 
 let button = document.getElementById("button");
+let loginBtn = document.getElementById("login");
 let firstName = document.getElementById("firstName");
 let lastName = document.getElementById("lastName");
 let email = document.getElementById("email");
@@ -41,7 +42,13 @@ function register() {
     }
 }
 
+function login_handler(){
+    window.location.href = '../pages/login.html';
+
+}
+
 button.addEventListener("click", register);
+loginBtn.addEventListener("click", login_handler);
 
 
 
