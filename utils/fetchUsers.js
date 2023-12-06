@@ -6,9 +6,10 @@ export async function fetchUsers() {
 
         xhr.onload = function () {
             let response = JSON.parse(this.responseText);
+            if(!localStorage.getItem("userData")){
+                localStorage.setItem("userData", JSON.stringify(response.users));
+            }
             res(response.users);
-            localStorage.clear();
-            localStorage.setItem("userData", JSON.stringify(response.users));
         }
         xhr.send();
     });
