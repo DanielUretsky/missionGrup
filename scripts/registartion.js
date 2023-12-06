@@ -23,14 +23,21 @@ class Users {
 
 function register() {
     if (firstName.value == "" || lastName.value == "" || email.value == "" || password.value == "") {
-        wrongData.innerText = "Missing Data"
-    }else if(firstName.value == localStorage(firstName)){
-        wrongData.innerText = "This user already exists in the system"
-    }else {
-        let user1 = new Users(users.length + 1, firstName.value, lastName.value, email.value, password.value)
-        users.push(user1);
-        localStorage.setItem("userData", JSON.stringify(users));
-        window.location.href = '../pages/login.html'
+        wrongData.innerText = "Missing Data";
+    } else {
+        for (let x in usersFromLocalStorage) {
+            let userObj = usersFromLocalStorage[x];
+            if (email.value == userObj.email) {
+                wrongData.innerText = "This user already exists in the system";
+                break;
+            } else {
+                let user1 = new Users(users.length + 1, firstName.value, lastName.value, email.value, password.value)
+                users.push(user1);
+                localStorage.setItem("userData", JSON.stringify(users));
+                window.location.href = '../pages/login.html';
+                break;
+            }
+        };
     }
 }
 
