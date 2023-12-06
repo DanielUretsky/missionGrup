@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(23, 23, 23);
+    background-color: rgb(11, 11, 11);
     font-family: 'Poppins', sans-serif;
     margin: auto;
     display: flex;
@@ -23,19 +23,22 @@ body{
     flex-direction: column;
     width: 250px;
     height: auto;
-    background-color: aliceblue;
+    background-color: rgba(255, 255, 255, 0.486);
     padding: 50px;
     border-radius: 50px;
     margin: auto;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 input{
     border-radius: 25px;
-    padding: 15px;
+    padding: 12px 15px;
     border: none;
     margin: 5px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
 }
 
 #button{
@@ -43,6 +46,14 @@ input{
     height: 50px;
     width: 200px;
     border: none;
+    background-color: rgb(255, 123, 0);
+}
+
+#button:hover{
+    background-color: rgb(209, 101, 0);
+    cursor: pointer;
+    transform: scale(1.1,1.1);
+    transition: 0.5s;
 }
 
 .container_right{
@@ -56,6 +67,21 @@ input{
     padding: 10px 25px;
     border-radius: 50px;
     border: none;
-    background-color: aqua;
+    background-color: rgb(255, 123, 0);
     outline: none;
+    transition: 0.5s;
+}
+
+.login:hover{
+    background-color: rgb(209, 101, 0);
+    cursor: pointer;
+    transform: scale(1.1,1.1);
+    transition: 0.5s;
+}
+
+#wrongData{
+    font-size: 13px;
+    position: absolute;
+    bottom: 0;
+    color: rgb(122, 0, 0);
 }
