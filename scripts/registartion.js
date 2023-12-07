@@ -23,7 +23,7 @@ class Users {
 }
 
 function register() {
-    if (firstName.value == "" || lastName.value == "" || email.value == "" || password.value == "") {
+    if (firstName.value == "" ||  lastName.value == "" ||  email.value == "" || password.value == "") {
         wrongData.innerText = "Missing Data";
     } else {
         for (let x in usersFromLocalStorage) {
@@ -35,20 +35,22 @@ function register() {
                 let user1 = new Users(users.length + 1, firstName.value, lastName.value, email.value, password.value)
                 users.push(user1);
                 localStorage.setItem("userData", JSON.stringify(users));
-                window.location.href = '../pages/login.html';
+                wrongData.innerText = "User successfully created";
+                wrongData.style.color = "rgb(0, 192, 22)";
+                setTimeout(() => {
+                    window.location.href = '../pages/login.html';
+                }, 2000);
                 break;
             }
         };
     }
 }
 
-function login_handler(){
+function login_handler() {
     window.location.href = '../pages/login.html';
 
 }
 
 button.addEventListener("click", register);
 loginBtn.addEventListener("click", login_handler);
-
-
 
