@@ -1,18 +1,24 @@
 import { fetchPosts } from "../utils/fetchPosts.js";
 
 //get data from localStorage 
-const loggedUser = localStorage.getItem("loggedUser");
+const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
 //redirect user to login if localStorage doesn't exist
-// if(!loggedUser) {
-//     window.location.href = "../pages/login.html";
-// }
+
 
 //get posts from async fetchPosts function 
 let posts = await fetchPosts();
 
 const postsDiv = document.getElementById("posts");
 const logoutBtn = document.getElementById("logout");
+const userEmailSpan = document.getElementById("userGreetings");
+
+if(!loggedUser) {
+    window.location.href = "../pages/login.html";
+}
+else {
+    userEmailSpan.textContent = `Welcome back ${loggedUser.email}`
+}
 console.log(posts);
 
 //removes localStorage and redirect to login.html
