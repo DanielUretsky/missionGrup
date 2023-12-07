@@ -12,7 +12,14 @@ const loggedUser = localStorage.getItem("loggedUser");
 let posts = await fetchPosts();
 
 const postsDiv = document.getElementById("posts");
+const logoutBtn = document.getElementById("logout");
 console.log(posts);
+
+//removes localStorage and redirect to login.html
+const logout = () => {
+    localStorage.removeItem("loggedUser");
+    window.location.href = "../pages/login.html";
+}
 
 //create posts form api
 function showPosts(postsArr) {
@@ -26,11 +33,6 @@ function showPosts(postsArr) {
         const postBodyDiv = document.createElement("div");
         const postIdSpan = document.createElement("span");
         const postImg = document.createElement("img");
-
-       // const skeletonContainer = document.createElement("div");
-        const skeletonTitle = document.createElement("div");
-        const skeletonBody = document.createElement("div");
-        
 
         const postDivTitleParagraph = document.createElement("p");
         
@@ -59,3 +61,5 @@ function showPosts(postsArr) {
 }
 
 showPosts(posts);
+
+logoutBtn.addEventListener("click", logout);
