@@ -41,7 +41,8 @@ header {
     align-items: center;
     justify-content: center;
 
-    color: white;
+    color: rgb(255, 123, 0);
+    font-size: 2rem;
 }
 
 .posts {
@@ -49,6 +50,7 @@ header {
     height: 100%;
 
     margin: auto;
+    margin-top: 20px;
 
     display: flex;
     flex-wrap: wrap;
@@ -66,21 +68,39 @@ header {
 
     display: flex;
     flex-direction: column;
-   
+
+    border-radius: 10px;
+
+    background-color: rgb(54, 54, 54);
+
+    font-family: 'Poppins', sans-serif;
+}
+
+.points {
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
 }
 
 .post__title {
     width: 400px;
-    padding: 15px 0;
+    padding: 15px 10px;
 
     border-bottom: 1px solid white;
-    color: white;
+   
+}
+
+.post__title .post__title--text {
+    width: 330px;
+    color: rgb(255, 255, 255);
 }
 
 .post__body {
     width: 400px;
     height: 100px;
-    padding: 75px 0;
+    padding: 75px 10px;
 
     display: flex;
     align-items: center;
