@@ -29,11 +29,13 @@ function isPasswordCorrect(email, password) {
     return user && user.password === password;
 }
 
-function logoutUser(email) {
+function logoutUser() {
     localStorage.removeItem("loggedUser");
 }
 
-displayAllUsers();
+function redirectToHomePage() {
+    window.location.href = "home.html";
+}
 
 function submitForm() {
     var email = document.getElementById("email").value;
@@ -51,10 +53,16 @@ function submitForm() {
             localStorage.setItem("loggedUser", JSON.stringify(loggedInUser));
             alert("משתמש נכנס למערכת בהצלחה!");
             displayLoggedUser();
+            redirectToHomePage();
         } else {
             alert("סיסמה שגויה!");
         }
     } else {
-        alert("משתמש לא קיים!");
+        var newUser = { email: email, password: password };
+        existingUsers.push(newUser);
+        localStorage.setItem("users", JSON.stringify(existingUsers));
+        alert("משתמש חדש נוצר בהצלחה!");
+        displayLoggedUser();
+        redirectToHomePage();
     }
 }
