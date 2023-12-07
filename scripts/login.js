@@ -37,9 +37,21 @@ function redirectToHomePage() {
     window.location.href = "home.html";
 }
 
+function isValidEmail(email) {
+    // בדיקת תקינות עם ביטוי רגולרי
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 function submitForm() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+
+    // בדיקה שהאימייל תקין
+    if (!isValidEmail(email)) {
+        alert("אנא הזן כתובת דוא\"ל חוקית");
+        return;
+    }
 
     var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
