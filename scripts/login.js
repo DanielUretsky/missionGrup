@@ -1,75 +1,87 @@
+// פונקציה להצגת משתמש מחובר
 function displayLoggedUser() {
-    var loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
     console.log("Logged User:", loggedUser);
 }
 
+// פונקציה להצגת כל המשתמשים ב-Local Storage
 function displayAllUsers() {
-    var allUsers = JSON.parse(localStorage.getItem("users")) || [];
+    let allUsers = JSON.parse(localStorage.getItem("users")) || [];
     console.log("All Users:", allUsers);
 }
 
+// פונקציה לקבלת אימייל של משתמש מחובר
 function getLoggedUserEmail() {
-    var loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
     return loggedUser ? loggedUser.email : null;
 }
 
+// פונקציה לבדיקה אם יש משתמש מחובר
 function isUserLoggedIn() {
     return getLoggedUserEmail() !== null;
 }
 
+// פונקציה לקבלת משתמש לפי אימייל
 function getUserByEmail(email) {
-    var allUsers = JSON.parse(localStorage.getItem("users")) || [];
+    let allUsers = JSON.parse(localStorage.getItem("users")) || [];
     return allUsers.find(function(user) {
         return user.email === email;
     });
 }
 
+// פונקציה לבדיקה אם הסיסמה נכונה
 function isPasswordCorrect(email, password) {
-    var user = getUserByEmail(email);
+    let user = getUserByEmail(email);
     return user && user.password === password;
 }
 
+// פונקציה להתנתקות מהמערכת
 function logoutUser() {
     localStorage.removeItem("loggedUser");
 }
 
+// פונקציה להפניה לדף הבית
 function redirectToHomePage() {
     window.location.href = "home.html";
 }
 
+// פונקציה לבדיקת תקינות כתובת דוא"ל
 function isValidEmail(email) {
-    // בדיקת תקינות עם ביטוי רגולרי
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
+// פונקציה לשליחת הטופס
 function submitForm() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let wrongData = document.getElementById("wrongData");
 
-    // בדיקה שהאימייל תקין
-    if (!isValidEmail(email)) {
-        alert("אנא הזן כתובת דוא\"ל חוקית");
+    if (!isValidEmail(email.value)) {
+        wrongData.innerText = "אנא הזן כתובת דוא\"ל חוקית";
         return;
     }
 
-    var existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    let usersFromLocalStorage = JSON.parse(localStorage.getItem("users")) || [];
 
-    var userExists = existingUsers.some(function(user) {
-        return user.email === email;
-    });
-
-    if (userExists) {
-        // המשתמש כבר קיים - קפיץ אותו לדף הבית
-        alert("משתמש כבר קיים! מעבר לדף הבית...");
-        redirectToHomePage();
-        return;
+    for (let userObj of usersFromLocalStorage) {
+        if (email.value === userObj.email) {
+            if (isPasswordCorrect(email.value, password.value)) {
+                localStorage.setItem("loggedUser", JSON.stringify(userObj));
+                alert("ברוך הבא למערכת!");
+                displayLoggedUser();
+                redirectToHomePage();
+            } else {
+                wrongData.innerText = "סיסמה שגויה";
+            }
+            return;
+        }
     }
 
-    // המשתמש אינו קיים - ביצוע התהליכים הרגילים
-    var newUser = { email: email, password: password };
-    existingUsers.push(newUser);
-    localStorage.setItem("users", JSON.stringify(existingUsers));
+    let newUser = { email: email.value, password: password.value };
+    usersFromLocalStorage.push(newUser);
+    localStorage.setItem("users", JSON.stringify(usersFromLocalStorage));
+
     alert("משתמש חדש נוצר בהצלחה!");
     displayLoggedUser();
     redirectToHomePage();
