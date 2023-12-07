@@ -36,13 +36,13 @@ function isPasswordCorrect(email, password) {
 }
 
 // פונקציה להתנתקות מהמערכת
-function logoutUser() {
-    localStorage.removeItem("loggedUser");
-}
+// function logoutUser() {
+//     localStorage.removeItem("loggedUser");
+// }
 
 // פונקציה להפניה לדף הבית
 function redirectToHomePage() {
-    window.location.href = "home.html";
+    window.location.href = "../pages/home.html";
 }
 
 // פונקציה לבדיקת תקינות כתובת דוא"ל
