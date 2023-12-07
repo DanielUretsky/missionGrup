@@ -60,21 +60,17 @@ function submitForm() {
     });
 
     if (userExists) {
-        if (isPasswordCorrect(email, password)) {
-            var loggedInUser = { email: email, password: password };
-            localStorage.setItem("loggedUser", JSON.stringify(loggedInUser));
-            alert("משתמש נכנס למערכת בהצלחה!");
-            displayLoggedUser();
-            redirectToHomePage();
-        } else {
-            alert("סיסמה שגויה!");
-        }
-    } else {
-        var newUser = { email: email, password: password };
-        existingUsers.push(newUser);
-        localStorage.setItem("users", JSON.stringify(existingUsers));
-        alert("משתמש חדש נוצר בהצלחה!");
-        displayLoggedUser();
+        // המשתמש כבר קיים - קפיץ אותו לדף הבית
+        alert("משתמש כבר קיים! מעבר לדף הבית...");
         redirectToHomePage();
+        return;
     }
+
+    // המשתמש אינו קיים - ביצוע התהליכים הרגילים
+    var newUser = { email: email, password: password };
+    existingUsers.push(newUser);
+    localStorage.setItem("users", JSON.stringify(existingUsers));
+    alert("משתמש חדש נוצר בהצלחה!");
+    displayLoggedUser();
+    redirectToHomePage();
 }
